@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson+Pro&display=swap');
+
+body {
+    font-family: 'Crimson Pro', serif;
+    font-size: 18px;
+    background-image: url('../img/background.jpg');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+#root {
+    margin-top: 50px;
+}
+
+.hidden {
+    display: none;
+    height: 0;
+}
+
+.card, .table {
+    border-radius: 5px;
+    box-shadow: 3px 3px 16px -4px rgba(0, 0, 0, 0.34);
+}

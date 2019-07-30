@@ -1,23 +1,35 @@
-import React from "react";
+import React from 'react';
+import PolicyForm from './PolicyForm';
+import './css/App.css';
 
 class App extends React.Component {
-    componentDidMount() {
-        this.fetchInsurances();
+    constructor(props) {
+        super(props);
+        this.state = {
+            policies: [],
+            hideForm: 'hidden'
+        };
+
+        this.createPolicyForm = this.createPolicyForm.bind(this);
     }
 
-    fetchInsurances() {
+    componentDidMount() {
+        this.getPolicies();
+    }
+
+    getPolicies() {
         fetch('https://its-testcase-api.azurewebsites.net/api/policy?page=0&size=15', {
             method: 'GET',
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'x-api-key',
-                'Access-Control-Allow-Methods': 'OPTIONS',
-                'x-api-key': '0ec8d823-e24b-40f8-b364-2b286d4b8fc4'
-            },
-            mode: 'cors'
+                'X-API-Key': '0ec8d823-e24b-40f8-b364-2b286d4b8fc4'
+            }
         })
             .then(response => response.json())
-            .then(result => console.log(result));
+            .then(result => this.setState({ policies: result }));
+    }
+
+    createPolicyForm() {
+        this.setState({ hideForm: '' });
     }
 
     render() {
@@ -27,7 +39,7 @@ class App extends React.Component {
                     <div className="row justify-content-center">
                         <div className="col-12">
 
-                            <table className="table table-striped table-dark">
+                            <table className="table table-light table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">Id</th>
@@ -54,6 +66,18 @@ class App extends React.Component {
 
                         </div>
                     </div>
+
+                    <div className="row justify-content-center">
+                        <div className="col-2">
+
+                            <button type="button" className="btn btn-info" onClick={this.createPolicyForm}>Create new policy</button>
+
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <PolicyForm hideForm={this.state.hideForm} />
                 </div>
             </>
         );
