@@ -9,8 +9,12 @@ class App extends React.Component {
         fetch('https://its-testcase-api.azurewebsites.net/api/policy?page=0&size=15', {
             method: 'GET',
             headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'x-api-key',
+                'Access-Control-Allow-Methods': 'OPTIONS',
                 'x-api-key': '0ec8d823-e24b-40f8-b364-2b286d4b8fc4'
-            }
+            },
+            mode: 'cors'
         })
             .then(response => response.json())
             .then(result => console.log(result));
