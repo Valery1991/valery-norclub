@@ -3,9 +3,8 @@
 body {
     font-family: 'Crimson Pro', serif;
     font-size: 18px;
-    background-image: url('../img/background.jpg');
-    background-size: 100% auto;
-    background-repeat: no-repeat;
+    background: url('../img/background.jpg') no-repeat fixed center;
+    background-size: cover;
 }
 
 #root {

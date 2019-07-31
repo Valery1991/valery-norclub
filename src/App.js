@@ -1,4 +1,5 @@
 import React from 'react';
+import PolicyTable from './PolicyTable';
 import PolicyForm from './PolicyForm';
 import './css/App.css';
 
@@ -6,11 +7,10 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            policies: [],
-            hideForm: 'hidden'
+            policies: []
         };
 
-        this.createPolicyForm = this.createPolicyForm.bind(this);
+        this.getPolicies = this.getPolicies.bind(this);
     }
 
     componentDidMount() {
@@ -25,59 +25,23 @@ class App extends React.Component {
             }
         })
             .then(response => response.json())
-            .then(result => this.setState({ policies: result }));
-    }
-
-    createPolicyForm() {
-        this.setState({ hideForm: '' });
+            .then(result => this.setState({ policies: result }))
+            .catch(error => console.error(error));
     }
 
     render() {
         return (
             <>
                 <div className="container">
-                    <div className="row justify-content-center">
-                        <div className="col-12">
+                    <div className="row">
+                        <div className="col-8">
+                            <PolicyTable data={this.state.policies} />
+                        </div>
 
-                            <table className="table table-light table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Id</th>
-                                        <th scope="col">Car Brand</th>
-                                        <th scope="col">Car Model</th>
-                                        <th scope="col">Start Date</th>
-                                        <th scope="col">End Date</th>
-                                        <th scope="col">Owners</th>
-                                        <th scope="col">Kilometers</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Test</td>
-                                        <td>Test</td>
-                                        <td>Test</td>
-                                        <td>Test</td>
-                                        <td>Test</td>
-                                        <td>Test</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
+                        <div className="col-4">
+                            <PolicyForm getPolicies={this.getPolicies} />
                         </div>
                     </div>
-
-                    <div className="row justify-content-center">
-                        <div className="col-2">
-
-                            <button type="button" className="btn btn-info" onClick={this.createPolicyForm}>Create new policy</button>
-
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <PolicyForm hideForm={this.state.hideForm} />
                 </div>
             </>
         );
