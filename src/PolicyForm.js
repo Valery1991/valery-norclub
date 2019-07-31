@@ -113,7 +113,8 @@ class PolicyForm extends React.Component {
     calculateDate(date, days) {
         const newDate = new Date(date);
         newDate.setDate(newDate.getDate() + days);
-        return newDate.toISOString().split('T')[0]; // convert to YYYY-mm-dd format because min/max on input needs this format
+        // convert to YYYY-mm-dd format because min/max on input needs this format for validation
+        return newDate.toISOString().split('T')[0];
     }
 
     render() {

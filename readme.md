@@ -9,3 +9,11 @@
 4.) To build for production, use the `npm run-script build` command.
 
 5.) Project is automatically deployed to Azure and can be found at http://valery-norclub.azurewebsites.net/
+
+## Libraries/packages used
+
+- React & ReactDOM
+- Babel
+- Webpack
+- Several loaders for webpack compiling
+- Bootstrap
